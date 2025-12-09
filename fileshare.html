@@ -1,77 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Public Drive</title>
-  <style>
-    /* Basic Reset */
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Public Drive</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+<style>
+    /* RESET */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: #f7f8fa;
-      color: #333;
-      line-height: 1.6;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: #fff;
+        overflow-x: hidden;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark {
+        background: linear-gradient(135deg, #0f0f0f, #1b1b1b);
+        color: #e0e0e0;
     }
 
     header {
-      background-color: #0057e7;
-      color: white;
-      padding: 1rem 2rem;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        text-align: center;
+        padding: 2rem 1rem;
     }
 
     header h1 {
-      font-size: 1.8rem;
-      letter-spacing: 1px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    header p {
+        margin-top: 0.5rem;
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    .theme-toggle {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255,255,255,0.15);
+        padding: 10px 18px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        backdrop-filter: blur(5px);
+        transition: 0.3s;
+    }
+
+    body.dark .theme-toggle {
+        background: rgba(255,255,255,0.1);
+        color: #fff;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+        max-width: 1100px;
+        margin: auto;
+        padding: 1rem;
     }
 
+    /* SEARCH BOX */
+    .search-box {
+        width: 100%;
+        margin: 1.5rem 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-box input {
+        width: 90%;
+        padding: 12px 20px;
+        font-size: 1rem;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+    body.dark .search-box input {
+        background: #222;
+        color: #fff;
+    }
+
+    .search-box input:focus {
+        transform: scale(1.03);
+    }
+
+    /* IFREAME CONTAINER */
     .iframe-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 75%; /* 4:3 ratio */
-      height: 0;
-      overflow: hidden;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      background-color: white;
+        position: relative;
+        width: 100%;
+        padding-bottom: 70%;
+        height: 0;
+        border-radius: 20px;
+        overflow: hidden;
+        backdrop-filter: blur(20px);
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
     }
 
     .iframe-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        border: none;
     }
 
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.4rem; }
+    /* FOOTER */
+    footer {
+        text-align: center;
+        margin: 2rem 0;
+        opacity: 0.8;
+        font-size: 0.9rem;
     }
-  </style>
+</style>
 </head>
-<body>
-  <header>
-    <h1>My Public Drive</h1>
-  </header>
 
-  <div class="container">
-    <div class="iframe-wrapper">
-      <iframe
-        src="https://drive.google.com/embeddedfolderview?id=1U_5MjQdkZ1hWeX1jf0Z7GBTodxBpmuTV#grid"
-        allowfullscreen
-      ></iframe>
+<body>
+
+<div class="theme-toggle" onclick="toggleTheme()">🌗 Theme</div>
+
+<header>
+    <h1>My Public Drive</h1>
+    <p>All shared files, neatly organized in your personal UI</p>
+</header>
+
+<div class="container">
+
+    <!-- SEARCH BAR (Visual Only) -->
+    <div class="search-box">
+        <input type="text" placeholder="Search (visual only — filtering inside iframe is limited)" />
     </div>
-  </div>
+
+    <!-- EMBED DRIVE -->
+    <div class="iframe-wrapper">
+        <iframe src="https://drive.google.com/embeddedfolderview?id=1U_5MjQdkZ1hWeX1jf0Z7GBTodxBpmuTV#grid"></iframe>
+    </div>
+</div>
+
+<footer>© 2025 • Your Public Drive Interface</footer>
+
+<script>
+    // DARK/LIGHT MODE TOGGLE
+    function toggleTheme() {
+        document.body.classList.toggle("dark");
+    }
+</script>
+
 </body>
 </html>
